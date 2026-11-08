@@ -2,7 +2,7 @@ import math
 
 movies = [
     {"title": "The Dune Chronicles", "year": 2021, "genres": {"sci-fi", "drama"},
-     "rating": 8.6, "duration_min": 155, 
+     "rating": 8.6, "duration_min": 155,
      "actors": ["T. Chalamet", "R. Ferguson", "O. Isaac"]},
     {"title": "Kitchen Stories", "year": 2019, "genres": {"comedy", "drama"},
      "rating": 7.1, "duration_min": 98, "actors": ["A. Novak", "M. Ferguson"]},
@@ -24,13 +24,15 @@ movies = [
      "rating": 7.3, "duration_min": 129, "actors": ["P. Diaz", "T. Chalamet"]},
 ]
 
+
 def average_rating(movies):
-    score_count=0
+    score_count = 0
     for i in range(len(movies)):
         score = movies[i]
         score_count += score["rating"]
-    overage=round(score_count/len(movies), 1)
-    return(overage)
+    overage = round(score_count / len(movies), 1)
+    return (overage)
+
 
 def catalog_age_stats(movies, current_year=2026):
     ages = []
@@ -44,22 +46,20 @@ def catalog_age_stats(movies, current_year=2026):
 
     return (oldest, newest, average)
 
+
 def duration_in_hours(minutes):
-    hours= minutes//60
-    min = minutes%60 
-    return(f"{hours}ч" ' ' f"{min}м")
-        
-#print(duration_in_hours(60))
-#print(catalog_age_stats(movies))
+    hours = minutes // 60
+    min = minutes % 60
+    return (f"{hours}ч" ' ' f"{min}м")
 
 
 def rating_tier(rating):
     if rating >= 9:
         return 'шедевр'
     elif rating >= 7:
-        return'хорошо' 
-    return 'средне' if rating >=5 else "слабо" 
-print(rating_tier(6))
+        return 'хорошо'
+    return 'средне' if rating >= 5 else "слабо"
+
 
 def decade_label(year):
     match year:
@@ -69,3 +69,28 @@ def decade_label(year):
             return "недавние"
         case _:
             return "старые"
+
+
+for movie in movies:
+    if 'comedy' in movie["genres"]:
+        continue
+    print(movie["title"])
+
+count = 0
+while count < len(movies):
+    if (movies[count]["rating"]) > 9:
+        print('шедевр', (movies[count]["title"]))
+        break
+    else:
+        count += 1
+else:
+    print("Шедевров не найдено")
+
+    
+def count_long_movies(movies, threshold=120):
+    count=0
+    for movie in movies:
+        if movie["duration_min"]>threshold:
+            count+=1
+    return count
+
